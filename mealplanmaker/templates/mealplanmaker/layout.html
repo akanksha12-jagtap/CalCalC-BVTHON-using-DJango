@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}CalCalC{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="shortcut icon" type="image/png" href="{% static 'favicon1.png' %}"/>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    </head>
+    <body style="max-width: 100%; overflow-x: hidden;">
+
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #dcf7df;">
+            <h3><a class="navbar-brand" href="{% url 'tdee' %}" style="font-weight: 900;font-family: Arial, Helvetica, sans-serif; color:#034a04;font-size: 30px;margin-right: 300px;margin-left:20px;">CalCalC</a></h3>
+            <a class="nav-link" href="{% url 'index' %}" style="color: black;">Weekly Plan</a>
+          
+            <div style="text-align: center; margin: 0; padding: 0;">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'tdee' %}" style="color: black;">Calorie Calc </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'singlemeal' %}" style="color: black;">Create Meal</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'weekly' %}" style="color: black;"></a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}" style="font-weight: bold;margin-left: 340px;">Log Out</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}" style="font-weight: bold;margin-left: 300px;">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}" style="font-weight: bold;">Register</a>
+                    </li>
+                {% endif %}
+              </ul>
+            </div>
+          </nav>
+        
+        <div class="body">
+            <div class="container" style="margin: auto;">
+                <div style="margin: auto; max-width: 600px;">
+                    {% block body %}
+                    {% endblock %}
+                </div>
+            </div> 
+        </div> 
+
+        
+    {% block script %}
+    <script src="{% static 'mealplanmaker.js' %}"></script>
+    
+    {% endblock %}
